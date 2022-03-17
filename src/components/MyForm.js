@@ -3,9 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Select, Checkbox, TextArea, RadioGroup, Radio } from 'informed';
 import { nameValidate, mailValidate, selectValidate } from '../utils/validation.js'
 import { roleDropdownValue, userRecomendValue, mostLikeDropdownValue, checkboxValue } from '../utils/formTemplate.js'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 
 function MyForm() {
+  const intl = useIntl();
 
   const onSubmit = ({ values }) => {
     console.log(values)
@@ -16,9 +18,9 @@ function MyForm() {
     <div className="MyForm">
 
       <header>
-        <h1 id="title" className="text-center">freeCodeCamp Survey Form</h1>
+        <h1 id="title" className="text-center">{<FormattedMessage id='header.h1' defaultMessage='freeCodeCamp Survey Form' />}</h1>
         <p id="description" className="description text-center">
-          Thank you for taking the time to help us improve the platform
+          {<FormattedMessage id='header.p' defaultMessage='Thank you for taking the time to help us improve the platform' />}
         </p>
       </header>
 
@@ -27,11 +29,12 @@ function MyForm() {
         <div className='form-group'>
           <Input
             name="name"
+            id='name'
             type='text'
             className='form-control'
-            label="Name"
-            required
-            placeholder="Enter your name"
+            label={<FormattedMessage id='name.label' defaultMessage='Name' />}
+            required={intl.formatMessage({ id: "required.message" })}
+            placeholder={intl.formatMessage({ id: "name.placeholder" })}
             validate={nameValidate}
             validateOn="blur-submit"
           />
@@ -40,22 +43,28 @@ function MyForm() {
         <div className='form-group'>
           <Input
             name="e-mail"
-            label="E-mail"
+            id='e-mail'
+            label={<FormattedMessage id='email.label' defaultMessage='E-mail' />}
             type='e-mail'
             className='form-control'
-            required
-            placeholder="Enter your E-mail"
+            required={intl.formatMessage({ id: "required.message" })}
+            placeholder={intl.formatMessage({ id: "email.placeholder" })}
             validate={mailValidate}
             validateOn="blur-submit"
           />
         </div>
 
         <div className='form-group'>
-          <label id="number-label">Age<span className="clue">(optional)</span></label>
+          <label
+            id="number-label">
+            {<FormattedMessage id='age.label' defaultMessage='Age' />}
+            <span className="clue">{<FormattedMessage id='age.optional' defaultMessage='(optional)' />}
+            </span>
+          </label>
           <Input
             name="age"
             type='number'
-            placeholder='Age'
+            placeholder={intl.formatMessage({ id: "age.placeholder" })}
             className='form-control'
           />
         </div>
@@ -66,21 +75,27 @@ function MyForm() {
             id="dropdown"
             className="form-control"
             required
-            label="Which option best describes your current role?"
-            defaultValue={'notSet'}
+            label={<FormattedMessage id='role.select.label' defaultMessage='Which option best describes your current role?' />}
+            defaultValue={'default'}
             validate={selectValidate}
             validateOn="blur-submit"
           >
-            <option disabled value="notSet" >Select current role</option>
-            {roleDropdownValue.map(item => <option key={uuidv4()} value={item}>{item}</option>)}
+            {roleDropdownValue.map(item =>
+              <option
+                key={uuidv4()}
+                disabled={item.isDefault}
+                value={item.translationKey}
+              >
+                {intl.formatMessage({ id: `role.option.${item.translationKey}` })}
+              </option>)}
           </Select>
         </div>
 
         <div className='form-group radio-group-wrap'>
-          <p>Would you recommend freeCodeCamp to a friend?</p>
+          <p>{<FormattedMessage id='radioGroup.p' defaultMessage='Would you recommend freeCodeCamp to a friend?' />}</p>
           <RadioGroup name="user-recommend" defaultValue='definitely'>
             {userRecomendValue.map(item => <label key={uuidv4()} className='iner-label'>
-              <Radio className='input-radio' value={item.value} label={item.label} />
+              <Radio className='input-radio' value={item.value} label={<FormattedMessage id={`radioGroup.radio.${item.value}`} />} />
             </label>)}
           </RadioGroup>
         </div>
@@ -91,34 +106,50 @@ function MyForm() {
             id="most-like"
             className="form-control"
             required
-            label="What is your favorite feature of freeCodeCamp?"
-            defaultValue={'notSet'}
+            label={<FormattedMessage id='mostLike.select.label' defaultMessage='What is your favorite feature of freeCodeCamp?' />}
+            defaultValue={'default'}
             validate={selectValidate}
             validateOn="blur-submit"
           >
-            <option disabled value="notSet" >Select an option</option>
-            {mostLikeDropdownValue.map(item => <option key={uuidv4()} value={item}>{item}</option>)}
+            {mostLikeDropdownValue.map(item =>
+              <option
+                key={uuidv4()}
+                defaultValue={item.isDefault}
+                disabled={item.isDefault}
+                value={item.translationKey}>
+                {intl.formatMessage({ id: `mostLike.select.${item.translationKey}` })}
+              </option>)}
           </Select>
         </div>
 
         <div className='form-group'>
-          <p>What would you like to see improved?<span className="clue">(Check all that apply)</span></p>
+          <p>
+            {<FormattedMessage id='checkbox.p' defaultMessage='What would you like to see improved?' />}
+            <span className="clue">{<FormattedMessage id='checkbox.p.brackets' defaultMessage='(Check all that apply)' />}
+            </span>
+          </p>
           {checkboxValue.map(item => <label key={uuidv4()} className='iner-label'>
-            <Checkbox className="input-checkbox" name={item.name} label={item.label} />
+            <Checkbox className="input-checkbox" name={item.name} label={<FormattedMessage id={`checkbox.input.${item.name}`} />} />
           </label>)}
         </div>
 
         <div className='form-group' >
           <TextArea
             name='comment'
-            placeholder="Enter your comment here..."
+            placeholder={intl.formatMessage({ id: "textArea.placeholder" })}
             className='input-textarea'
             id="comments"
-            label='Any comments or suggestions?'
+            label={<FormattedMessage id='textArea.label' defaultMessage='Any comments or suggestions?' />}
           />
         </div>
 
-        <button type="submit" id="submit" className='submit-button' >Submit</button>
+        <button 
+        type="submit" 
+        id="submit" 
+        className='submit-button' 
+        >
+          {<FormattedMessage id='submit.button' defaultMessage='Submit' />}
+          </button>
       </Form>
     </div>
   );

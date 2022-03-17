@@ -41,6 +41,13 @@ body::before {
   background-repeat: no-repeat;
   background-position: center;
 }
-
+.language-switch{
+  position: fixed;
+  background-color: #37af65;
+  height: 50px;
+  width: 150px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 

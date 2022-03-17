@@ -1,5 +1,42 @@
 
-export const roleDropdownValue = ["Student", 'Job', 'Learner', 'PreferNo', 'Others']
+export const roleDropdownValue = [
+
+    {
+        name: "Select an option",
+        translationKey: 'default',
+        isDefault: true
+    },
+
+    {
+        name: "Student",
+        translationKey: 'student',
+        isDefault: false
+    },
+
+    {
+        name: "Job",
+        translationKey: 'job',
+        isDefault: false
+    },
+
+    {
+        name: "Learner",
+        translationKey: 'learner',
+        isDefault: false
+    },
+
+    {
+        name: "Prefer Not Say",
+        translationKey: 'preferNo',
+        isDefault: false
+    },
+
+    {
+        name: "Others",
+        translationKey: 'others',
+        isDefault: false
+    },
+]
 
 export const userRecomendValue = [{
     value: 'definitely',
@@ -12,7 +49,42 @@ export const userRecomendValue = [{
     label: 'Not sure'
 }]
 
-export const mostLikeDropdownValue = ['Challenges', 'Projects', 'Community', 'Open Source']
+export const mostLikeDropdownValue = [
+
+    {
+        name: "Select an option",
+        translationKey: 'default',
+        isDefault: true
+    },
+
+    {
+        name: "Challenges",
+        translationKey: 'challenges',
+        isDefault: false
+    },
+
+    {
+        name: "Projects",
+        translationKey: 'projects',
+        isDefault: false
+    },
+
+    {
+        name: "Community",
+        translationKey: 'community',
+        isDefault: false
+    },
+
+    {
+        name: "Open Source",
+        translationKey: 'openSource',
+        isDefault: false
+    },
+]
+
+
+
+
 
 export const checkboxValue = [{
     name: 'front-end-projects',

@@ -148,3 +148,15 @@ h1 {
   .radio-group-wrap fieldset{
     border: none;
   }
+  #most-like-error{
+    color: red;
+  }
+  #dropdown-error{
+    color: red;
+  }
+  #name-error{
+    color: red;
+  }
+  #e-mail-error{
+    color: red;
+  }
