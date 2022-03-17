@@ -1,7 +1,9 @@
+import './MyForm.css';
 import { v4 as uuidv4 } from 'uuid';
 import { Form, Input, Select, Checkbox, TextArea, RadioGroup, Radio } from 'informed';
 import { nameValidate, mailValidate, selectValidate } from '../utils/validation.js'
 import { roleDropdownValue, userRecomendValue, mostLikeDropdownValue, checkboxValue } from '../utils/formTemplate.js'
+
 
 function MyForm() {
 
@@ -11,7 +13,7 @@ function MyForm() {
   };
 
   return (
-    <div className="App">
+    <div className="MyForm">
 
       <header>
         <h1 id="title" className="text-center">freeCodeCamp Survey Form</h1>
