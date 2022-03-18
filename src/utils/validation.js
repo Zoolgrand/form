@@ -1,4 +1,4 @@
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage} from 'react-intl'
 
 export const nameValidate = value => {
   if (!value || value.length < 5)
